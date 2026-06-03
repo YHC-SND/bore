@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="description" content="般若阁 - 佛经阅读">
+  <title>般若阁 - 佛经</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">般若阁</a>
+      <div class="header-actions">
+        <button class="icon-btn" id="theme-toggle" title="切换主题" aria-label="切换主题">🌙</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <h1 class="page-title">佛经阅藏</h1>
+    <p class="page-subtitle">深入经藏，智慧如海</p>
+
+    <div class="card-list" id="scripture-list">
+      <!-- JS 动态渲染 -->
+    </div>
+
+    <div class="disclaimer">
+      本网站仅为佛教文化学习与修行辅助工具，不涉及任何商业行为。<br>
+      佛经内容来源于乾隆大藏经等公共版权版本。
+    </div>
+  </main>
+
+  <nav class="bottom-nav">
+    <a href="index.html">
+      <span class="nav-icon">🐟</span>木鱼
+    </a>
+    <a href="scriptures.html" class="active">
+      <span class="nav-icon">📖</span>佛经
+    </a>
+    <a href="profile.html">
+      <span class="nav-icon">👤</span>我的
+    </a>
+  </nav>
+
+  <script src="js/config.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const list = document.getElementById('scripture-list');
+      if (list && typeof SCRIPTURES !== 'undefined') {
+        list.innerHTML = SCRIPTURES.map(s => `
+          <a href="scripture-detail.html?id=${s.id}" class="card card-link">
+            <h3 class="card-title">${s.title}</h3>
+            <p class="card-desc">${s.description}</p>
+            <span style="font-size:0.75rem;color:var(--text-muted);margin-top:8px;display:inline-block;">
+              ${s.author} · ${s.category}
+            </span>
+          </a>
+        `).join('');
+      }
+    });
+  </script>
+</body>
+</html>
